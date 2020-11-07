@@ -1,8 +1,8 @@
 import React from "react"
 import Layout from "../components/Layout"
 import GridSquare from '../components/GridSquare';
-
 import styled from 'styled-components';
+import { graphql } from "gatsby";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -11,16 +11,35 @@ const StyledDiv = styled.div`
   align-content: flex-start;
 `;
 
-export default function Shop() {
+export default function Shop({data}) {
+
+  const content = data.allDatoCmsProduct.edges;
+
   return (
     <Layout>
       <StyledDiv>
-        <GridSquare />
-        <GridSquare />
-        <GridSquare />
-        <GridSquare />
-        <GridSquare />
+        {content.map(({ node }) => (
+          <GridSquare 
+            key={node.id} 
+            title={node.name} 
+            price={node.price}
+          />
+        ))}
       </StyledDiv>
     </Layout>
   )
 }
+
+export const query = graphql`
+  query ProductsQuery {
+    allDatoCmsProduct {
+      edges {
+        node {
+          id
+          price
+          name
+        }
+      }
+    }
+  }
+`;

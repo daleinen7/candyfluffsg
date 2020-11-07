@@ -11,12 +11,12 @@ const StyledDiv = styled.div`
   margin-bottom: 2em;
 `;
 
-export default function GridSquare() {
+export default function GridSquare(props) {
   return(
     <StyledDiv>
-      <h3 className="title">Product Title</h3>
-      <p className="description">Product Description</p>
-      <p className="price">$Moneys</p>
+      <h3 className="title">{props.title}</h3>
+      {/* <p className="description">Product Description</p> */}
+      <p className="price">${props.price}</p>
     </StyledDiv>
   )
 }
